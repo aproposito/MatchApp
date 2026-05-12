@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\MatchPrediction;
+
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
@@ -17,6 +19,7 @@ class User extends Authenticatable
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
+
     /**
      * Get the attributes that should be cast.
      *
@@ -28,5 +31,13 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function matchPredictions()
+    {
+        return $this->hasMany(MatchPrediction::class);
+    }
+    public function championPrediction()
+    {
+        return $this->hasOne(ChampionPrediction::class);
     }
 }
