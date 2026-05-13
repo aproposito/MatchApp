@@ -19,7 +19,11 @@
                     @foreach($teams as $team)
                     <tr>
                         <td>{{ $team->name }}</td>
-                        <td>{{ $team->flag }}</td>
+                        <td>
+                            @if($team->flag)
+                            <img src="{{ $team->flag }}" alt="{{ $team->name }}" class="h-6 w-auto">
+                            @endif
+                        </td>
                         <td>
                             <a href="{{ route('teams.edit', $team) }}">Editar</a>
                             <form action="{{ route('teams.destroy', $team) }}" method="POST">
