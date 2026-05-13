@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\MatchGame;
 use App\Models\ChampionPrediction;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+
+#[Fillable(['name', 'flag'])]
 
 class Team extends Model
 {
