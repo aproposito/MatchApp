@@ -3,7 +3,6 @@
         <h2>Crear equipo</h2>
     </x-slot>
 
-    {{-- El contenido va AQUÍ, fuera del slot --}}
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <form action="{{ route('teams.store') }}" method="POST">

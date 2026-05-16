@@ -5,6 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Team;
 use App\Models\MatchPrediction;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+
+#[Fillable(['phase', 'match_date_time', 'home_team_id', 'away_team_id'])]
 
 class MatchGame extends Model
 {
