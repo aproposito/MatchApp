@@ -36,16 +36,51 @@
                     </div>
                 </div>
 
+                {{-- Estado del partido --}}
                 @if($match->match_date_time > now())
-                {{-- Abierto: mostrar formulario de predicción --}}
+                {{-- ABIERTO --}}
                 <p class="text-green-600">Abierto</p>
 
+                @if($match->matchPredictions->first())
+                {{-- Ya apostó --}}
+                <p>Tu predicción: {{ $match->matchPredictions->first()->predicted_home_goal }} - {{ $match->matchPredictions->first()->predicted_away_goal }}</p>
                 @else
-                {{-- Cerrado: mostrar resultado --}}
+                {{-- Formulario de predicción--}}
+                <form action="{{ route('match_predictions.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="match_id" value="{{ $match->id }}">
+
+                    <div>
+                        <label>Goles {{ $match->homeTeam->name }}</label>
+                        <input type="number" name="predicted_home_goal" min="0" max="20" required>
+                    </div>
+
+                    <div>
+                        <label>Goles {{ $match->awayTeam->name }}</label>
+                        <input type="number" name="predicted_away_goal" min="0" max="20" required>
+                    </div>
+
+                    <button type="submit">Apostar</button>
+                </form>
+                @endif
+
+                @else
+                {{-- CERRADO --}}
                 @if($match->final_home_goals !== null)
-                <p>{{ $match->final_home_goals }} - {{ $match->final_away_goals }}</p>
+                <p>Resultado: {{ $match->final_home_goals }} - {{ $match->final_away_goals }}</p>
                 @else
                 <p class="text-orange-500">En juego</p>
+                @endif
+
+                {{-- Predicción y puntos del usuario --}}
+                @if($match->matchPredictions->first())
+                <p>Tu predicción: {{ $match->matchPredictions->first()->predicted_home_goal }} - {{ $match->matchPredictions->first()->predicted_away_goal }}</p>
+                <p>Puntos: {{
+                        $match->matchPredictions->first()->points_sign + 
+                        $match->matchPredictions->first()->points_home_goals + 
+                        $match->matchPredictions->first()->points_away_goals + 
+                        $match->matchPredictions->first()->points_bonus 
+                    }}</p>
                 @endif
                 @endif
 
