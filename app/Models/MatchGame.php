@@ -7,7 +7,7 @@ use App\Models\Team;
 use App\Models\MatchPrediction;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 
-#[Fillable(['phase', 'match_date_time', 'home_team_id', 'away_team_id'])]
+#[Fillable(['phase', 'match_date_time', 'home_team_id', 'away_team_id', 'final_home_goals', 'final_away_goals'])]
 
 class MatchGame extends Model
 {

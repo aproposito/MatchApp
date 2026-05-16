@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('users', UserController::class);
     Route::resource('champion_predictions', ChampionPredictionController::class);
     Route::get('/ranking', fn() => view('ranking'))->name('ranking');
+    Route::get('/matchday', [MatchGameController::class, 'matchday'])->name('matchday');
 });
 
 require __DIR__.'/auth.php';

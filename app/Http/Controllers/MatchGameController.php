@@ -77,7 +77,8 @@ class MatchGameController extends Controller
             'match_date_time' => 'required|date',
             'home_team_id' => 'required|exists:teams,id',
             'away_team_id' => 'required|exists:teams,id|different:home_team_id',
-            'match_date_time' => 'required|date|after:today',
+            'final_home_goals' => 'nullable|integer|min:0|max:20',
+            'final_away_goals' => 'nullable|integer|min:0|max:20',
         ]);
 
         $match = MatchGame::find($id);
@@ -86,6 +87,8 @@ class MatchGameController extends Controller
             'match_date_time' => $request->match_date_time,
             'home_team_id' => $request->home_team_id,
             'away_team_id' => $request->away_team_id,
+            'final_home_goals' => $request->final_home_goals,
+            'final_away_goals' => $request->final_away_goals,
         ]);
             return redirect()->route('matches.index')->with('success', 'Partido actualizado correctamente.');
        //
@@ -102,4 +105,21 @@ class MatchGameController extends Controller
                     return redirect()->route('matches.index')->with('success', 'Partido eliminado correctamente.');
 
     }
+      /**
+     * Display today's matches with user predictions for the matchday view.
+     */
+    public function matchday()
+{
+    $matches = MatchGame::with([
+        'homeTeam',
+        'awayTeam',
+        'matchPredictions' => function($query) {
+            $query->where('user_id', auth()->id());
+        }
+    ])->whereDate('match_date_time', today())
+      ->orderBy('match_date_time')
+      ->get();
+
+    return view('matches.matchday', compact('matches'));
+}
 }

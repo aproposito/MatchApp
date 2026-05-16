@@ -14,27 +14,30 @@
                 {{-- Enlaces principales --}}
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     @auth
-                        <x-nav-link :href="route('matches.index')" :active="request()->routeIs('matches.*')">
-                            Jornada
-                        </x-nav-link>
-                        <x-nav-link :href="route('ranking')" :active="request()->routeIs('ranking')">
-                            Ranking
-                        </x-nav-link>
-                        @if(auth()->user()->role === 'admin')
-                            <x-nav-link :href="route('teams.index')" :active="request()->routeIs('teams.*')">
-                                Equipos
-                            </x-nav-link>
-                            <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
-                                Usuarios
-                            </x-nav-link>
-                        @endif
+                    <x-nav-link :href="route('matchday')" :active="request()->routeIs('matchday')">
+                        Jornada
+                    </x-nav-link>
+                    <x-nav-link :href="route('ranking')" :active="request()->routeIs('ranking')">
+                        Ranking
+                    </x-nav-link>
+                    @if(auth()->user()->role === 'admin')
+                    <x-nav-link :href="route('matches.index')" :active="request()->routeIs('matches.*')">
+                        Gestión partidos
+                    </x-nav-link>
+                    <x-nav-link :href="route('teams.index')" :active="request()->routeIs('teams.*')">
+                        Equipos
+                    </x-nav-link>
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                        Usuarios
+                    </x-nav-link>
+                    @endif
                     @else
-                        <x-nav-link :href="route('login')">
-                            Iniciar sesión
-                        </x-nav-link>
-                        <x-nav-link :href="route('register')">
-                            Registrarse
-                        </x-nav-link>
+                    <x-nav-link :href="route('login')">
+                        Iniciar sesión
+                    </x-nav-link>
+                    <x-nav-link :href="route('register')">
+                        Registrarse
+                    </x-nav-link>
                     @endauth
                 </div>
             </div>
@@ -86,27 +89,27 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @auth
-                <x-responsive-nav-link :href="route('matches.index')" :active="request()->routeIs('matches.*')">
-                    Jornada
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('ranking')" :active="request()->routeIs('ranking')">
-                    Ranking
-                </x-responsive-nav-link>
-                @if(auth()->user()->role === 'admin')
-                    <x-responsive-nav-link :href="route('teams.index')" :active="request()->routeIs('teams.*')">
-                        Equipos
-                    </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
-                        Usuarios
-                    </x-responsive-nav-link>
-                @endif
+            <x-responsive-nav-link :href="route('matches.index')" :active="request()->routeIs('matches.*')">
+                Jornada
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('ranking')" :active="request()->routeIs('ranking')">
+                Ranking
+            </x-responsive-nav-link>
+            @if(auth()->user()->role === 'admin')
+            <x-responsive-nav-link :href="route('teams.index')" :active="request()->routeIs('teams.*')">
+                Equipos
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
+                Usuarios
+            </x-responsive-nav-link>
+            @endif
             @else
-                <x-responsive-nav-link :href="route('login')">
-                    Iniciar sesión
-                </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('register')">
-                    Registrarse
-                </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('login')">
+                Iniciar sesión
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('register')">
+                Registrarse
+            </x-responsive-nav-link>
             @endauth
         </div>
 

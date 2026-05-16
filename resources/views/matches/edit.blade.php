@@ -56,6 +56,22 @@
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
+                <div>
+                    <label for="final_home_goals">Goles local</label>
+                    <input type="number" name="final_home_goals" id="final_home_goals" min="0" max="20"
+                        value="{{ old('final_home_goals', $match->final_home_goals) }}">
+                    @error('final_home_goals')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div>
+                    <label for="final_away_goals">Goles visitante</label>
+                    <input type="number" name="final_away_goals" id="final_away_goals" min="0" max="20"
+                        value="{{ old('final_away_goals', $match->final_away_goals) }}">
+                    @error('final_away_goals')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
                 <button type="submit">Guardar</button>
 
             </form>
