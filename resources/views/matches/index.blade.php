@@ -37,7 +37,7 @@
                             {{ $match->awayTeam->name }}
                         </td>
                         <td>{{ $match->phase }}</td>
-                        <td>{{ $match->match_date_time }}</td>
+                        <td>{{ $match->local_date }}</td>
                         <td>
                             @if($match->final_home_goals !== null)
                                 {{ $match->final_home_goals }} - {{ $match->final_away_goals }}

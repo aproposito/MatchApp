@@ -25,4 +25,11 @@ class MatchGame extends Model
     {
         return $this->hasMany(MatchPrediction::class, 'match_id');
     }
+    public function getLocalDateAttribute()
+{
+    return \Carbon\Carbon::parse($this->match_date_time)
+        ->setTimezone('Europe/Madrid')
+        ->format('d/m/Y H:i');
+}
+
 }

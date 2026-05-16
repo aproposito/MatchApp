@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
     $this->call(WorldCup2026TeamsSeeder::class);
+    $this->call(GroupStageMatchesSeeder::class);
 
   
     }
