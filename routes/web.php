@@ -1,10 +1,12 @@
 <?php
+
 use App\Http\Controllers\ChampionPredictionController;
 use App\Http\Controllers\MatchGameController;
 use App\Http\Controllers\MatchPredictionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\RankingController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,8 +27,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('match_predictions', MatchPredictionController::class);
     Route::resource('users', UserController::class);
     Route::resource('champion_predictions', ChampionPredictionController::class);
-    Route::get('/ranking', fn() => view('ranking'))->name('ranking');
+    Route::get('/ranking', [RankingController::class, 'index'])->name('ranking');
     Route::get('/matchday', [MatchGameController::class, 'matchday'])->name('matchday');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
