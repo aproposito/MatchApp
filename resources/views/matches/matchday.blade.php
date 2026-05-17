@@ -77,8 +77,8 @@
                 <p>Tu predicción: {{ $match->matchPredictions->first()->predicted_home_goal }} - {{ $match->matchPredictions->first()->predicted_away_goal }}</p>
                 <p>Puntos: {{
                         $match->matchPredictions->first()->points_sign + 
-                        $match->matchPredictions->first()->points_home_goals + 
-                        $match->matchPredictions->first()->points_away_goals + 
+                        $match->matchPredictions->first()->points_home_goal + 
+                        $match->matchPredictions->first()->points_away_goal + 
                         $match->matchPredictions->first()->points_bonus 
                     }}</p>
                 @endif
