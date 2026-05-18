@@ -18,17 +18,23 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('teams', TeamController::class);
-    Route::resource('matches', MatchGameController::class);
-    Route::resource('match_predictions', MatchPredictionController::class);
-    Route::resource('users', UserController::class);
-    Route::resource('champion_predictions', ChampionPredictionController::class);
-    Route::get('/ranking', [RankingController::class, 'index'])->name('ranking');
+    
     Route::get('/matchday', [MatchGameController::class, 'matchday'])->name('matchday');
+    Route::resource('match_predictions', MatchPredictionController::class);
+    Route::get('/ranking', [RankingController::class, 'index'])->name('ranking');
+    
+    Route::middleware('admin')->group(function () {
+        Route::resource('teams', TeamController::class);
+        Route::resource('matches', MatchGameController::class);
+        Route::resource('users', UserController::class);
+        Route::resource('champion_predictions', ChampionPredictionController::class);
+    });
 });
 
 require __DIR__ . '/auth.php';

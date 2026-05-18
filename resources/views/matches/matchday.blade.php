@@ -46,6 +46,7 @@
                 <p>Tu predicción: {{ $match->matchPredictions->first()->predicted_home_goal }} - {{ $match->matchPredictions->first()->predicted_away_goal }}</p>
                 @else
                 {{-- Formulario de predicción--}}
+                @if(auth()->user()->role !== 'admin')
                 <form action="{{ route('match_predictions.store') }}" method="POST">
                     @csrf
                     <input type="hidden" name="match_id" value="{{ $match->id }}">
@@ -62,6 +63,7 @@
 
                     <button type="submit">Apostar</button>
                 </form>
+                @endif
                 @endif
 
                 @else
