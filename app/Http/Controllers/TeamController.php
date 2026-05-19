@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Team;
 
 class TeamController extends Controller
 {
@@ -11,7 +12,8 @@ class TeamController extends Controller
      */
     public function index()
     {
-        //
+        $teams = Team::all();
+        return view('teams.index', compact('teams'));
     }
 
     /**
@@ -19,7 +21,8 @@ class TeamController extends Controller
      */
     public function create()
     {
-        //
+        return view('teams.create');
+        
     }
 
     /**
@@ -27,7 +30,17 @@ class TeamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'flag' => 'nullable|url',
+        ]);
+
+        Team::create([
+            'name' => $request->name,
+            'flag' => $request->flag,
+        ]);
+
+        return redirect()->route('teams.index')->with('success', 'Equipo creado correctamente.');
     }
 
     /**
@@ -43,7 +56,8 @@ class TeamController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $team = Team::find($id);
+        return view('teams.edit', compact('team'));
     }
 
     /**
@@ -51,7 +65,17 @@ class TeamController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'flag' => 'nullable|url',
+        ]);
+        $team = Team::find($id);
+        $team->update([
+            'name' => $request->name,
+            'flag' => $request->flag,
+        ]);
+
+        return redirect()->route('teams.index')->with('success', 'Equipo actualizado correctamente.');
     }
 
     /**
@@ -59,6 +83,9 @@ class TeamController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $team = Team::find($id);
+        $team->delete();
+
+        return redirect()->route('teams.index')->with('success', 'Equipo eliminado correctamente.');;
     }
 }
