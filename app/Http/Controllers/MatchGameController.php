@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\MatchGame;
 use App\Models\Team;
 use App\Services\PointsCalculatorService;
+use App\Models\ChampionPrediction;
 
 
 class MatchGameController extends Controller
@@ -124,6 +125,13 @@ class MatchGameController extends Controller
             ->orderBy('match_date_time')
             ->get();
 
-        return view('matches.matchday', compact('matches'));
+        $teams = Team::orderBy('name')->get();
+        $championPrediction = ChampionPrediction::where('user_id', auth()->id())->first();
+        $groupsFinished = !MatchGame::where('phase', 'groups')
+            ->where('match_date_time', '>', now())
+            ->exists();
+
+
+        return view('matches.matchday', compact('matches', 'teams', 'championPrediction', 'groupsFinished'));
     }
 }

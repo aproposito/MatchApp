@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\ChampionPrediction;
+use App\Models\Team;
+use App\Models\User;
+
 
 class ChampionPredictionController extends Controller
 {
@@ -26,9 +30,18 @@ class ChampionPredictionController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
-    }
+{
+    $request->validate([
+        'team_id' => 'required|exists:teams,id',
+      ]);
+
+    ChampionPrediction::create([
+        'team_id' => $request->team_id,
+        'user_id' => auth()->id(),
+    ]);
+
+    return redirect()->route('matchday')->with('success', 'Equipo votado correctamente.');
+}
 
     /**
      * Display the specified resource.

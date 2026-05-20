@@ -100,7 +100,7 @@
                         <input type="number" name="predicted_away_goal" min="0" max="20" required
                             class="w-12 border-2 border-gray-200 rounded text-center font-oswald font-semibold text-base text-gray-900 py-1 focus:outline-none focus:border-blue-800 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"> <button type="submit"
                             class="ml-2 bg-red-600 text-white font-barlow font-bold text-xs uppercase tracking-widest px-4 py-2 rounded hover:bg-red-700 transition duration-150">
-                        Apostar
+                            Apostar
                         </button>
                     </form>
                 </div>
@@ -126,6 +126,27 @@
             @empty
             <p class="font-noto text-white/80 text-sm">No hay partidos hoy.</p>
             @endforelse
+            @if(!$groupsFinished)
+            {{-- La fase de grupos no ha terminado --}}
+
+            @if($championPrediction)
+            {{-- Ya ha votado — mostrar bloqueado --}}
+            <p>Tu campeón: {{ $championPrediction->team->name }}</p>
+            @else
+            {{-- No ha votado — mostrar formulario --}}
+            <form action="{{ route('champion_predictions.store') }}" method="POST">
+                @csrf
+                <select name="team_id">
+                    <option value="">-- Elige tu campeón --</option>
+                    @foreach($teams as $team)
+                    <option value="{{ $team->id }}">{{ $team->name }}</option>
+                    @endforeach
+                </select>
+                <button type="submit">Votar</button>
+            </form>
+            @endif
+
+            @endif
         </div>
     </div>
 </x-app-layout>
