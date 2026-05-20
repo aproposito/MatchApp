@@ -132,6 +132,17 @@ class GroupStageMatchesSeeder extends Seeder
             ['home_team_id' => 38, 'away_team_id' => 48, 'phase' => 'groups', 'match_date_time' => '2026-06-27 23:30:00'], // RD Congo vs Uzbekistán
             ['home_team_id' => 6,  'away_team_id' => 9,  'phase' => 'groups', 'match_date_time' => '2026-06-28 02:00:00'], // Argelia vs Austria
             ['home_team_id' => 30, 'away_team_id' => 7,  'phase' => 'groups', 'match_date_time' => '2026-06-28 02:00:00'], // Jordania vs Argentina
+
+            ['home_team_id' => 49, 'away_team_id' => 50, 'phase' => 'groups', 'match_date_time' => '2026-05-23 19:00:00'], // Deportivo Alavés vs Rayo Vallecano
+            ['home_team_id' => 51, 'away_team_id' => 52, 'phase' => 'groups', 'match_date_time' => '2026-05-23 19:00:00'], // Real Betis vs Levante UD
+            ['home_team_id' => 53, 'away_team_id' => 54, 'phase' => 'groups', 'match_date_time' => '2026-05-23 19:00:00'], // Celta vs Sevilla FC
+            ['home_team_id' => 55, 'away_team_id' => 56, 'phase' => 'groups', 'match_date_time' => '2026-05-23 19:00:00'], // Espanyol vs Real Sociedad
+            ['home_team_id' => 57, 'away_team_id' => 58, 'phase' => 'groups', 'match_date_time' => '2026-05-23 19:00:00'], // Getafe vs Osasuna
+            ['home_team_id' => 59, 'away_team_id' => 60, 'phase' => 'groups', 'match_date_time' => '2026-05-23 19:00:00'], // Mallorca vs Oviedo
+            ['home_team_id' => 61, 'away_team_id' => 62, 'phase' => 'groups', 'match_date_time' => '2026-05-23 19:00:00'], // Real Madrid vs Athletic Club
+            ['home_team_id' => 63, 'away_team_id' => 64, 'phase' => 'groups', 'match_date_time' => '2026-05-23 19:00:00'], // Valencia vs Barcelona
+            ['home_team_id' => 65, 'away_team_id' => 66, 'phase' => 'groups', 'match_date_time' => '2026-05-23 19:00:00'], // Girona vs Elche
+            ['home_team_id' => 67, 'away_team_id' => 68, 'phase' => 'groups', 'match_date_time' => '2026-05-24 19:00:00'], // Villarreal vs Atlético
         ];
 
         MatchGame::insert($matches);

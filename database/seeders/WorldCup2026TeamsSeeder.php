@@ -67,6 +67,27 @@ class WorldCup2026TeamsSeeder extends Seeder
             ['name' => 'Uruguay', 'flag' => 'https://flagcdn.com/uy.svg'],
             ['name' => 'Uzbekistán', 'flag' => 'https://flagcdn.com/uz.svg'],
 
+            ['name' => 'Deportivo Alavés', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/f/f8/Deportivo_Alaves_logo_%282020%29.svg'],
+            ['name' => 'Rayo Vallecano', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/d/d8/Rayo_Vallecano_logo.svg'],
+            ['name' => 'Real Betis', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/1/13/Real_betis_logo.svg'],
+            ['name' => 'Levante UD', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/7/7b/Levante_Uni%C3%B3n_Deportiva%2C_S.A.D._logo.svg'],
+            ['name' => 'Celta', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/1/12/RC_Celta_de_Vigo_logo.svg'],
+            ['name' => 'Sevilla FC', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/3/3b/Sevilla_FC_logo.svg'],
+            ['name' => 'RCD Espanyol de Barcelona', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/9/92/RCD_Espanyol_crest.svg'],
+            ['name' => 'Real Sociedad', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/f/f1/Real_Sociedad_logo.svg'],
+            ['name' => 'Getafe CF', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/4/46/Getafe_logo.svg'],
+            ['name' => 'CA Osasuna', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/3/38/CA_Osasuna_2024_crest.svg'],
+            ['name' => 'RCD Mallorca', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/e/e0/Rcd_mallorca.svg'],
+            ['name' => 'Real Oviedo', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/6/6e/Real_Oviedo_logo.svg'],
+            ['name' => 'Real Madrid', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg'],
+            ['name' => 'Athletic Club', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/9/98/Club_Athletic_Bilbao_logo.svg'],
+            ['name' => 'Valencia CF', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/c/ce/Valenciacf.svg'],
+            ['name' => 'FC Barcelona', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg'],
+            ['name' => 'Girona FC', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/f/f7/Girona_FC_Logo.svg'],
+            ['name' => 'Elche CF', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/a/a7/Elche_CF_logo.svg'],
+            ['name' => 'Villarreal CF', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/b/b9/Villarreal_CF_logo-en.svg'],
+            ['name' => 'Atlético de Madrid', 'flag' => 'https://upload.wikimedia.org/wikipedia/en/f/f9/Atletico_Madrid_Logo_2024.svg'],
+
         ];
         DB::table('teams')->insert($teams);
     }

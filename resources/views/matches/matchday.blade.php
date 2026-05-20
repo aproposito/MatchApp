@@ -126,26 +126,39 @@
             @empty
             <p class="font-noto text-white/80 text-sm">No hay partidos hoy.</p>
             @endforelse
-            @if(!$groupsFinished)
-            {{-- La fase de grupos no ha terminado --}}
-
-            @if($championPrediction)
-            {{-- Ya ha votado — mostrar bloqueado --}}
-            <p>Tu campeón: {{ $championPrediction->team->name }}</p>
-            @else
-            {{-- No ha votado — mostrar formulario --}}
-            <form action="{{ route('champion_predictions.store') }}" method="POST">
-                @csrf
-                <select name="team_id">
-                    <option value="">-- Elige tu campeón --</option>
-                    @foreach($teams as $team)
-                    <option value="{{ $team->id }}">{{ $team->name }}</option>
-                    @endforeach
-                </select>
-                <button type="submit">Votar</button>
-            </form>
-            @endif
-
+            @if(!$groupsFinished && auth()->user()->role !== 'admin')
+            <div class="bg-white rounded-md mb-3 shadow-sm overflow-hidden">
+                <div class="flex items-center px-4 py-1 bg-gray-900">
+                    <span class="font-barlow font-bold text-xs uppercase tracking-widest text-white/90">
+                        🏆 Campeón del Mundial
+                    </span>
+                </div>
+                <div class="px-4 py-3">
+                    @if($championPrediction)
+                    <div class="flex items-center gap-2">
+                        <span class="font-barlow font-bold text-xs uppercase tracking-widest text-gray-500">Tu campeón:</span>
+                        <span class="font-oswald font-semibold text-base uppercase text-blue-800">
+                            {{ $championPrediction->team->name }}
+                        </span>
+                        <span class="ml-auto font-barlow text-xs text-gray-400 uppercase tracking-widest">Voto bloqueado</span>
+                    </div>
+                    @else
+                    <form action="{{ route('champion_predictions.store') }}" method="POST" class="flex items-center gap-2">
+                        @csrf
+                        <span class="font-barlow font-bold text-xs uppercase tracking-widest text-gray-500">Tu campeón:</span>
+                        <select name="team_id" class="border-2 border-gray-200 rounded px-3 py-1 font-noto text-sm focus:outline-none focus:border-blue-800">
+                            <option value="">-- Elige --</option>
+                            @foreach($teams as $team)
+                            <option value="{{ $team->id }}">{{ $team->name }}</option>
+                            @endforeach
+                        </select>
+                        <button type="submit" class="bg-red-600 text-white font-barlow font-bold text-xs uppercase tracking-widest px-4 py-2 rounded hover:bg-red-700 transition duration-150">
+                            Votar
+                        </button>
+                    </form>
+                    @endif
+                </div>
+            </div>
             @endif
         </div>
     </div>
