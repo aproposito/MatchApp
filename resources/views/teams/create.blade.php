@@ -1,29 +1,22 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2>Crear equipo</h2>
+        <h2 class="font-oswald font-semibold text-2xl uppercase tracking-wide text-gray-900 leading-tight">
+            Crear equipo
+        </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <form action="{{ route('teams.store') }}" method="POST">
-                @csrf
-
-                <div>
-                    <label for="name">Nombre</label>
-                    <input type="text" name="name" id="name" value="{{ old('name') }}">
-                </div>
-
-                <div>
-                    <label for="flag">Bandera (URL)</label>
-                    <input type="text" name="flag" id="flag" value="{{ old('flag') }}">
-                    @error('name')
-                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <button type="submit">Guardar</button>
-
-            </form>
+    <div class="py-8">
+        <div class="max-w-xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white rounded-md shadow-sm p-6">
+                <form action="{{ route('teams.store') }}" method="POST">
+                    @csrf
+                    @include('teams._form')
+                    <button type="submit"
+                        class="bg-red-600 text-white font-barlow font-bold text-xs uppercase tracking-widest px-6 py-2 rounded hover:bg-red-700 transition duration-150">
+                        Guardar
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </x-app-layout>
