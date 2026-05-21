@@ -13,6 +13,10 @@ export default {
         extend: {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                bebas: ['Bebas Neue'],
+                barlow: ['Barlow Condensed'],
+                noto: ['Noto Sans'],
+                oswald: ['Oswald'],
             },
         },
     },
