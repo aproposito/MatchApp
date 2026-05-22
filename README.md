@@ -36,7 +36,7 @@ en IT Academy Barcelona Activa.
 
 Entidades principales: `users` · `teams` · `matches` · `predictions` · `champion_predictions`
 
-![Diagrama ER](docs/er-diagram.png)
+![Diagrama ER](docs/mer_diagram.png)
 
 ---
 
