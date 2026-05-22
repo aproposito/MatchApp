@@ -1,58 +1,172 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# MatchApp ⚽
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplicación web de porra del Mundial 2026. Los usuarios predicen resultados de partidos,
+acumulan puntos y compiten en un ranking general.
 
-## About Laravel
+Proyecto desarrollado como ejercicio S4.01 del Bootcamp FullStack PHP
+en IT Academy Barcelona Activa.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🛠 Tecnologías
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Backend:** PHP 8.x · Laravel 13.8 · Eloquent ORM
+- **Frontend:** Blade · Tailwind CSS
+- **Base de datos:** MySQL
+- **Autenticación:** Laravel Breeze
+- **Herramientas:** Composer · Vite · Git
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ✨ Funcionalidades
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Página pública de bienvenida
+- Registro, login y recuperación de contraseña con envío de email (Breeze + Mailtrack)
+- Predicción de resultados de partidos (bloqueada al iniciar el partido)
+- Predicción del campeón del Mundial
+- Cálculo automático de puntos al introducir el resultado real
+- Ranking general actualizado automáticamente
+- Panel de administrador: gestión de equipos, partidos y usuarios
+- Página de error 404 personalizada
+- Capa de Servicio para separar la lógica de negocio de los controladores
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+---
 
-## Agentic Development
+## 🗃 Modelo de datos
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Entidades principales: `users` · `teams` · `matches` · `predictions` · `champion_predictions`
+
+![Diagrama ER](docs/er-diagram.png)
+
+---
+
+## 🚀 Instalación
+
+### Requisitos previos
+- PHP >= 8.2
+- Composer
+- Node.js >= 18
+- MySQL
+
+### Pasos
 
 ```bash
-composer require laravel/boost --dev
+# 1. Clonar el repositorio
+git clone https://github.com/aproposito/matchapp.git
+cd matchapp
 
-php artisan boost:install
+# 2. Instalar dependencias PHP
+composer install
+
+# 3. Instalar dependencias JS
+npm install
+
+# 4. Configurar variables de entorno
+cp .env.example .env
+php artisan key:generate
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Edita `.env` con tus credenciales de base de datos:
 
-## Contributing
+```env
+DB_DATABASE=matchapp
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Para el envío de emails (recuperación de contraseña), configura también las variables `MAIL_*`.
+El proyecto se ha probado con [Mailtrack](https://mailtrack.io) como servicio SMTP:
 
-## Code of Conduct
+```env
+MAIL_MAILER=smtp
+MAIL_HOST=
+MAIL_PORT=
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_FROM_ADDRESS=
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+# 5. Ejecutar migraciones y seeders
+php artisan migrate --seed
 
-## Security Vulnerabilities
+# 6. Compilar assets
+npm run dev
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+# 7. Iniciar el servidor
+php artisan serve
+```
 
-## License
+Accede a `http://localhost:8000`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+
+## 🧪 Cómo probarlo
+
+### Credenciales de prueba
+
+| Rol | Email | Contraseña |
+|-----|-------|------------|
+| Admin | admin@matchapp.com | password |
+| Usuario | user@matchapp.com | password |
+
+También puedes registrar un usuario nuevo desde la página de bienvenida.
+
+### Partidos
+
+Los seeders cargan un conjunto de partidos de ejemplo. Es probable que las fechas
+no estén activas en el momento de la revisión. Para activarlos hay dos opciones:
+
+- Modificar las fechas directamente desde el panel de administrador (perfil admin → Partidos → Editar)
+- Ajustar los datos en el seeder y volver a ejecutar `php artisan migrate:fresh --seed`
+
+---
+
+## 🏗 Arquitectura
+
+El proyecto sigue el patrón **MVC** con una capa de Servicio adicional:
+
+```
+app/
+├── Http/
+│   └── Controllers/     # Reciben la request, delegan al Service
+├── Services/            # Lógica de negocio (cálculo de puntos, etc.)
+└── Models/              # Eloquent ORM
+```
+
+---
+
+## 📋 Sistema de puntuación
+
+| Acierto | Puntos |
+|---------|--------|
+| Resultado (signo) | 50 |
+| Goles equipo local exactos | 20 |
+| Goles equipo visitante exactos | 20 |
+| Bonus por cada gol > 2 en el marcador total | +5 |
+| Acertar el campeón del Mundial | 150 |
+
+---
+
+## 📸 Capturas de pantalla
+
+| Bienvenida | Jornada | Ranking |
+|------------|---------|---------|
+| ![Welcome](docs/screenshots/welcome.png) | ![Matchday](docs/screenshots/matchday.png) | ![Ranking](docs/screenshots/ranking.png) |
+
+---
+
+## 📝 Notas
+
+- **Avatar de usuario:** no implementado en esta versión.
+- **Gitflow:** se ha trabajado con ramas por área de desarrollo en lugar de por funcionalidad. Queda como mejora para próximas iteraciones.
+- **Livewire:** no se ha utilizado en esta entrega.
+
+---
+
+## 👤 Autor
+
+**Álvaro Martínez Aldama**
+[LinkedIn](https://www.linkedin.com/in/alvaro-martinez-aldama/) · [GitHub](https://github.com/aproposito/)
+
+Proyecto académico — IT Academy Barcelona Activa · Sprint 4 · 2025
