@@ -12,7 +12,15 @@ class MatchPredictionController extends Controller
      */
     public function index()
     {
-        //
+        $predictions = MatchPrediction::where('user_id', auth()->id())
+            ->whereHas('matchGame', function ($query) {
+                $query->whereNotNull('final_home_goals')
+                    ->whereNotNull('final_away_goals');
+            })
+            ->with('matchGame.homeTeam', 'matchGame.awayTeam')
+            ->get();
+
+        return view('match_predictions.history', compact('predictions'));
     }
 
     /**
@@ -27,22 +35,22 @@ class MatchPredictionController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $request->validate([
-        'match_id' => 'required|exists:matches,id',
-        'predicted_home_goal' => 'required|integer|min:0|max:20',
-        'predicted_away_goal' => 'required|integer|min:0|max:20',
-    ]);
+    {
+        $request->validate([
+            'match_id' => 'required|exists:matches,id',
+            'predicted_home_goal' => 'required|integer|min:0|max:20',
+            'predicted_away_goal' => 'required|integer|min:0|max:20',
+        ]);
 
-    MatchPrediction::create([
-        'match_id' => $request->match_id,
-        'user_id' => auth()->id(),
-        'predicted_home_goal' => $request->predicted_home_goal,
-        'predicted_away_goal' => $request->predicted_away_goal,
-    ]);
+        MatchPrediction::create([
+            'match_id' => $request->match_id,
+            'user_id' => auth()->id(),
+            'predicted_home_goal' => $request->predicted_home_goal,
+            'predicted_away_goal' => $request->predicted_away_goal,
+        ]);
 
-    return redirect()->route('matchday')->with('success', 'Apuesta registrada correctamente.');
-}
+        return redirect()->route('matchday')->with('success', 'Apuesta registrada correctamente.');
+    }
 
     /**
      * Display the specified resource.
