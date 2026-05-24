@@ -27,7 +27,7 @@ class MatchGame extends Model
     }
     public function getLocalDateAttribute()
 {
-    return \Carbon\Carbon::parse($this->match_date_time)
+    return \Carbon\Carbon::parse($this->match_date_time,'UTC')
         ->setTimezone('Europe/Madrid')
         ->format('d/m/Y H:i');
 }

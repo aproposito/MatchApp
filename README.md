@@ -21,8 +21,9 @@ en IT Academy Barcelona Activa.
 ## ✨ Funcionalidades
 
 - Página pública de bienvenida
-- Registro, login y recuperación de contraseña con envío de email (Breeze + Mailtrack)
+- Registro, login y recuperación de contraseña con envío de email (Breeze + Mailtrap)
 - Predicción de resultados de partidos (bloqueada al iniciar el partido)
+- Historial personal de apuestas en partidos terminados
 - Predicción del campeón del Mundial
 - Cálculo automático de puntos al introducir el resultado real
 - Ranking general actualizado automáticamente
@@ -36,7 +37,7 @@ en IT Academy Barcelona Activa.
 
 Entidades principales: `users` · `teams` · `matches` · `predictions` · `champion_predictions`
 
-![Diagrama ER](docs/er-diagram.png)
+![Diagrama ER](docs/erdiagram.png)
 
 ---
 
@@ -152,7 +153,8 @@ app/
 
 | Bienvenida | Jornada | Ranking |
 |------------|---------|---------|
-| ![Welcome](docs/screenshots/welcome.png) | ![Matchday](docs/screenshots/matchday.png) | ![Ranking](docs/screenshots/ranking.png) |
+| ![Welcome](docs/screenshots/welcome.png) | ![Matchday](docs/screenshots/matchday.png) | ![Ranking](docs/screenshots/ranking.png) | Mis apuestas |
+| ![My Predictions](docs/screenshots/mypredictions.png) |
 
 ---
 
