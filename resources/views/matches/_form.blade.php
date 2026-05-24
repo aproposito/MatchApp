@@ -61,7 +61,7 @@
         Fecha y hora
     </label>
     <input type="datetime-local" name="match_date_time" id="match_date_time"
-        value="{{ old('match_date_time', isset($match) ? \Carbon\Carbon::parse($match->match_date_time)->format('Y-m-d\TH:i') : '') }}"
+        value="{{ old('match_date_time', isset($match) ? \Carbon\Carbon::parse($match->match_date_time, 'UTC')->setTimezone('Europe/Madrid')->format('Y-m-d\TH:i') : '') }}"
         class="w-full border-2 border-gray-200 rounded px-3 py-2 font-noto text-sm text-gray-900 focus:outline-none focus:border-blue-800">
     @error('match_date_time')
     <p class="font-noto text-xs text-red-600 mt-1">{{ $message }}</p>
