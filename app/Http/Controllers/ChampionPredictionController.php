@@ -62,10 +62,23 @@ class ChampionPredictionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+     public function update(Request $request, string $id)
+{
+    $request->validate([
+        'team_id' => 'required|exists:teams,id',
+    ]);
+
+    $championPrediction = ChampionPrediction::findOrFail($id);
+
+    if ($championPrediction->user_id !== auth()->id()) abort(403);
+
+    $championPrediction->update([
+        'team_id' => $request->team_id,
+    ]);
+
+    return redirect()->route('matchday')->with('success', 'Equipo actualizado correctamente.');
+}
+    
 
     /**
      * Remove the specified resource from storage.
