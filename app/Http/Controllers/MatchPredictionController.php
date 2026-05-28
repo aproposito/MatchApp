@@ -71,10 +71,24 @@ class MatchPredictionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+public function update(Request $request, string $id)
+{
+    $request->validate([
+        'predicted_home_goal' => 'required|integer|min:0|max:20',
+        'predicted_away_goal' => 'required|integer|min:0|max:20',
+    ]);
+
+    $matchPrediction = MatchPrediction::findOrFail($id);
+
+    if ($matchPrediction->user_id !== auth()->id()) abort(403);
+
+    $matchPrediction->update([
+        'predicted_home_goal' => $request->predicted_home_goal,
+        'predicted_away_goal' => $request->predicted_away_goal,
+    ]);
+
+    return redirect()->route('matchday')->with('success', 'Apuesta actualizada correctamente.');
+}   
 
     /**
      * Remove the specified resource from storage.
